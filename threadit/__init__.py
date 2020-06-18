@@ -16,9 +16,9 @@ def thredit_result(func):
 
 
 class Threadit:
-    def __init__(self, func, *args):
+    def __init__(self, func, *args, **kwargs):
         self.name = func.__name__
-        self.thread = threading.Thread(target=func, args=args)
+        self.thread = threading.Thread(target=func, args=args, kwargs=kwargs)
         self.thread.start()
 
     def doing_working(self):
