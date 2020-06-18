@@ -16,10 +16,9 @@ pip install threadit
 ### Usage
 
 ```python
-from threadit import Threadit, thredit_result
+from threadit import Threadit
 
 
-@thredit_result
 def get_company_name():
     # Do work in thread
     return 'Adapted'
@@ -27,18 +26,24 @@ def get_company_name():
 
 def do_some_work():
     get_name = Threadit(get_company_name)
+
     # do stuff or run a while loop to wait for result
+    
+    more_thread = Threadit(get_company_name)
+
     while get_name.doing_working():
         print('Waiting for thread to finnish')
-    
-    # You can also call .get() and the system will wait for the thread to return your result.
 
-    company_name = get_name.get()
+    # You can also call .result() and the main thread will wait for the thread to return your result.
+
+    company_name = get_name.result()
+    company_name2 = more_thread.result()
+
     print(company_name) # Outputs -> Adapted
+    print(company_name2) # Outputs -> Adapted
     
 ```
 
-Remember to add the @thredit_result decorator to the function you want to run in a thread, else you get back a SyntaxWarning.
 
 ### Testing
 

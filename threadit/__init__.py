@@ -1,37 +1,26 @@
 import threading
-import warnings
-from functools import wraps
-
-_results = {}
-
-
-def thredit_result(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        name = func.__name__
-        result = func(*args, **kwargs)
-        _results[name] = result
-
-    return wrapper
 
 
 class Threadit:
     def __init__(self, func, *args, **kwargs):
         self.name = func.__name__
-        self.thread = threading.Thread(target=func, args=args, kwargs=kwargs)
-        self.thread.start()
+        self.func = func
+        self.args = args
+        self.kwargs = kwargs
+        self.job_result = None
+        self.thread = self._start_thread()
+
+    def _start_job(self, *args, **kwargs):
+        self.job_result = self.func(*args, **kwargs)
+
+    def _start_thread(self):
+        thread = threading.Thread(target=self._start_job, args=self.args, kwargs=self.kwargs)
+        thread.start()
+        return thread
 
     def doing_working(self):
         return self.thread.is_alive()
 
-    def get(self):
+    def result(self):
         self.thread.join()
-        try:
-            this_result = _results[self.name]
-            del _results[self.name]
-            return this_result
-        except KeyError:
-            warnings.warn(
-                "Could not find result for Threadit object. Are you sure the function is decorated with @threadit_result?",
-                SyntaxWarning
-            )
+        return self.job_result
