@@ -56,7 +56,7 @@ class TestThreditWorkingStatus(TestCase):
         run = Threadit(test_func4)
         sleep(1)
 
-        status = run.doing_working()
+        status = run.doing_work()
         self.assertEqual(status, True)
 
         result = run.result()
@@ -68,7 +68,7 @@ class TestThreditTimeout(TestCase):
         run = Threadit(test_func4)
         sleep(1)
 
-        status = run.doing_working()
+        status = run.doing_work()
         self.assertEqual(status, True)
 
         result = run.result(timeout=1)
