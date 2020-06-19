@@ -18,9 +18,9 @@ class Threadit:
         thread.start()
         return thread
 
-    def doing_working(self):
+    def doing_work(self):
         return self.thread.is_alive()
 
-    def result(self):
-        self.thread.join()
+    def result(self, timeout: int = None) -> int:
+        self.thread.join(timeout=timeout)
         return self.job_result

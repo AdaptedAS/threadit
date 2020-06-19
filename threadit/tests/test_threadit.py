@@ -24,6 +24,11 @@ def test_func5(var1, var2, var3, num1=0, num2=0):
     return var1 + var2 + var3 + num1 + num2
 
 
+def test_func6():
+    sleep(10)
+    return 'Hello'
+
+
 class TestThredit(TestCase):
     def test_with_no_var(self):
         run = Threadit(test_func1)
@@ -56,5 +61,18 @@ class TestThreditWorkingStatus(TestCase):
 
         result = run.result()
         self.assertEqual(result, 'Hello')
+
+
+class TestThreditTimeout(TestCase):
+    def test_threadit_status(self):
+        run = Threadit(test_func4)
+        sleep(1)
+
+        status = run.doing_working()
+        self.assertEqual(status, True)
+
+        result = run.result(timeout=1)
+
+        self.assertEqual(result, None)
 
 

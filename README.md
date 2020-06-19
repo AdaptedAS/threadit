@@ -16,11 +16,13 @@ pip install threadit
 ### Usage
 
 ```python
+import time
 from threadit import Threadit
 
 
 def get_company_name():
     # Do work in thread
+    time.sleep(5)
     return 'Adapted'
 
 
@@ -31,19 +33,48 @@ def do_some_work():
     
     more_thread = Threadit(get_company_name)
 
-    while get_name.doing_working():
+    while get_name.doing_work():
         print('Waiting for thread to finnish')
 
-    # You can also call .result() and the main thread will wait for the thread to return your result.
-
+    # You can also call .result() and the main thread will wait 
+    # for the thread to return your result.
     company_name = get_name.result()
-    company_name2 = more_thread.result()
+
+    # this will timeout the thread in 1 second if its not finished
+    company_name2 = more_thread.result(timeout=1)
 
     print(company_name) # Outputs -> Adapted
-    print(company_name2) # Outputs -> Adapted
+    print(company_name2) # Outputs -> None
     
 ```
 
+### Main commands
+
+```python
+# Import the module
+from threadit import Threadit
+
+# Start your function with or without arguments
+var = Threadit(function, args, kwargs)
+
+# Wait for the function to finnish or get the result if its finished
+var.result()
+```
+
+## Optional commands
+```python
+# Check if your thread is still working on the function.
+# This will return True if the function is not completed.
+
+var.doing_work()
+
+# Terminate the thread. This will noe wait for the function to 
+# finnish and will return None as result if the function is not
+# done within the timelimit set
+
+var.result(timeout=10)
+
+```
 
 ### Testing
 
