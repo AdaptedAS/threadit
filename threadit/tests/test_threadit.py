@@ -1,6 +1,6 @@
 from unittest import TestCase
 from time import sleep
-from threadit import Threadit
+from threadit import ThreadIT
 
 
 def test_func1():
@@ -31,29 +31,29 @@ def test_func6():
 
 class TestThredit(TestCase):
     def test_with_no_var(self):
-        run = Threadit(test_func1)
+        run = ThreadIT(test_func1)
         result = run.result()
         self.assertEqual(result, True)
 
     def test_with_one_var(self):
-        run = Threadit(test_func2, 'Hello')
+        run = ThreadIT(test_func2, 'Hello')
         result = run.result()
         self.assertEqual(result, 'Hello')
 
     def test_with_more_vars(self):
-        run = Threadit(test_func3, 1, 2, 3)
+        run = ThreadIT(test_func3, 1, 2, 3)
         result = run.result()
         self.assertEqual(result, 6),
 
     def test_with_vars_and_kwargs(self):
-        run = Threadit(test_func5, 1, 2, 3, num1=5, num2=5)
+        run = ThreadIT(test_func5, 1, 2, 3, num1=5, num2=5)
         result = run.result()
         self.assertEqual(result, 16)
 
 
 class TestThreditWorkingStatus(TestCase):
     def test_threadit_status(self):
-        run = Threadit(test_func4)
+        run = ThreadIT(test_func4)
         sleep(1)
 
         status = run.doing_work()
@@ -65,7 +65,7 @@ class TestThreditWorkingStatus(TestCase):
 
 class TestThreditTimeout(TestCase):
     def test_threadit_status(self):
-        run = Threadit(test_func4)
+        run = ThreadIT(test_func4)
         sleep(1)
 
         status = run.doing_work()
