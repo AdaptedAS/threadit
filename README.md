@@ -17,7 +17,7 @@ pip install threadit
 
 ```python
 import time
-from threadit import Threadit
+from threadit import ThreadIT
 
 
 def get_company_name():
@@ -27,11 +27,11 @@ def get_company_name():
 
 
 def do_some_work():
-    get_name = Threadit(get_company_name)
+    get_name = ThreadIT(get_company_name)
 
     # do stuff or run a while loop to wait for result
     
-    more_thread = Threadit(get_company_name)
+    more_thread = ThreadIT(get_company_name)
 
     while get_name.doing_work():
         print('Waiting for thread to finnish')
@@ -52,10 +52,10 @@ def do_some_work():
 
 ```python
 # Import the module
-from threadit import Threadit
+from threadit import ThreadIT
 
 # Start your function with or without arguments
-var = Threadit(function, args, kwargs)
+var = ThreadIT(function, args, kwargs)
 
 # Wait for the function to finnish or get the result if its finished
 var.result()
