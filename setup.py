@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='threadit',
-      version='1.2.0',
+      version='1.2.1',
       description='Takes the hassle away from threading functions and getting their results',
       url='https://github.com/AdaptedAS/threadit',
       author='Odd Jøren Røland',

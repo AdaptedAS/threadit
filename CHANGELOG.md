@@ -1,4 +1,7 @@
 ### Changelog:
+v1.2.1
+Bugfix for ParceIT function
+
 v.1.2.0
 Added kwargs to ParceIT
 

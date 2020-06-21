@@ -7,7 +7,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/threadit)
 
 A nice package to help you run functions in threads and get their result.<br />
-
+This is under development! So please check for changes before updating
 ### Installation
 ```
 pip install threadit

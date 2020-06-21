@@ -43,7 +43,7 @@ class ParseIT:
         for i in range(self.threads):
             if i + 1 == int(self.threads):
                 self.end = len(self.items)
-            worker = Threadit(self.func, args=[self.items[self.start:self.end]], kwds=self.kwargs)
+            worker = ThreadIT(self.func, args=[self.items[self.start:self.end]], kwds=self.kwargs)
             self.workers.append(worker)
             self.start += self.amount
             self.end += self.amount
