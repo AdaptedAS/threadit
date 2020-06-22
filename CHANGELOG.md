@@ -1,4 +1,7 @@
 ### Changelog:
+v1.2.3
+Added so ParceIt dont crash if you send in empty list
+
 v1.2.2
 Added join argument to ParceIT.result() so the method can return one list instead of a list of lists.
 

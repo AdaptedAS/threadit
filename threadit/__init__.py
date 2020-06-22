@@ -33,7 +33,7 @@ class ParseIT:
         self.items = work
         self.kwargs = kwargs
         self.workers = []
-        self.amount = int(len(work) / threads)
+        self.amount = int(len(work) / threads) if int(len(work)) >= 1 else 1
         self.end = self.amount
         self.start = 0
         self.job_result = []
