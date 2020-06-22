@@ -27,10 +27,10 @@ class ThreadIT:
 
 
 class ParseIT:
-    def __init__(self, function=callable, work=list, threads=False, **kwargs):
+    def __init__(self, function=callable, work=list, threads=4, **kwargs):
+        self.threads = threads
         self.func = function
         self.items = work
-        self.threads = threads
         self.kwargs = kwargs
         self.workers = []
         self.amount = int(len(work) / threads)
@@ -43,7 +43,7 @@ class ParseIT:
         for i in range(self.threads):
             if i + 1 == int(self.threads):
                 self.end = len(self.items)
-            worker = ThreadIT(self.func, args=[self.items[self.start:self.end]], kwds=self.kwargs)
+            worker = ThreadIT(self.func, self.items[self.start:self.end], **self.kwargs)
             self.workers.append(worker)
             self.start += self.amount
             self.end += self.amount
@@ -67,9 +67,16 @@ class ParseIT:
                 return True
         return False
 
-    def result(self, timeout: int = None) -> list:
+    def result(self, timeout: int = None, joined=False) -> list:
         for worker in self.workers:
             res = worker.result(timeout=timeout)
             self.job_result.append(res)
+
+        if joined:
+            result = []
+            for item in self.job_result:
+                if item is not None:
+                    result.extend(item)
+            return result
 
         return self.job_result
